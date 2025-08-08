@@ -23,7 +23,7 @@ Write-Host "4. Creating the 'staging' Deployment Slot..." -ForegroundColor Green
 az webapp deployment slot create --name $webAppName --slot $stagingSlotName
 
 Write-Host "5. Set configuration in Azure on $stagingSlotName slot..." -ForegroundColor Green
-az webapp config appsettings set --name $webAppName --slot $stagingSlotName --settings "Greeting=Hello from Azure Configuration - Staging Slot"
+az webapp config appsettings set --name $webAppName --slot $stagingSlotName --settings 'Greeting=Hello from Azure Configuration - Staging Slot'
 
 
 # Publish and deploy
