@@ -41,7 +41,7 @@ jobs:
             
             # Log in to Azure using the secret stored in secrets and variables
             - name: 'Login to Azure'
-              uses: actions/login@v1
+              uses: azure/login@v1
               with: 
                 creds: ${{ secrets.AZURE_CREDENTIALS }}
 
