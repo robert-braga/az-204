@@ -1,5 +1,6 @@
 # AZ-204 exam - mini-projects created during preparation
 
+
 # AZ-204: Web App Deployment in a App Service Plan
 
 This project demonstrates a professional setup for deploying a .NET Web API to Azure App Service, featuring a CI/CD pipeline with GitHub Actions and a safe deployment strategy using deployment slots.
