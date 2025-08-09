@@ -24,3 +24,26 @@ This project demonstrates a professional setup for deploying a .NET Web API to A
 - Wrote a YAML file from scratch to define a CI/CD pipeline.
 - Understood the practical benefits of deployment slots for safe, zero-downtime releases and easy rollbacks.
 - Managed infrastructure (`S1` plan, slots) and application configuration (`appsettings`) via Azure CLI.
+
+
+## 2. Azure functions project
+
+This project demonstrates a setup for deploying a .NET Function App to Azure Functions.
+
+### Key Features
+
+- **Infrastructure as Code (IaC):** All Azure resources are defined and created using PowerShell scripts for consistency and repeatability.
+
+
+### How It Works
+
+1.  The `create-resources.ps1` script provisions an Azure Function App togheter with a storage account, for code storage and state management
+2. The function app is created in a Consumption plan, the best solution for a dev/test project
+3. Inside the storage account, I created a container which is the trigger for the 'ProcessUploadedFile' function.
+
+
+### Learnings
+
+- Every time when the URL foor the 'GreetUser' route is accessed, a trigger handles it and logs the information in Azure Log Monitor
+- Every time a file is uploaded in the container created, a blob trigger activates the function which process the file.
+- Azure Functions is based on the serverless model - pay depending on the use - and is the solution used for the pieces of code which must react when certain events happen

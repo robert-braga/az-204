@@ -1,0 +1,8 @@
+az configure --defaults group=rg-rbr-azfunctions location=northeurope
+
+# to create the resources in Azure
+.\createresources.ps1
+
+# publish the code in Azure
+$functionAppName = "func-rbr-1326"
+func azure functionapp publish $functionAppName
