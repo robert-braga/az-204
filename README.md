@@ -47,3 +47,18 @@ This project demonstrates a setup for deploying a .NET Function App to Azure Fun
 - Every time when the URL foor the 'GreetUser' route is accessed, a trigger handles it and logs the information in Azure Log Monitor
 - Every time a file is uploaded in the container created, a blob trigger activates the function which process the file.
 - Azure Functions is based on the serverless model - pay depending on the use - and is the solution used for the pieces of code which must react when certain events happen
+
+
+## 3. Azure storage project
+
+This project demonstrates a setup for deploying a .NET Web App which uses Azure Blob Storage and Azure Cosmos DB to store the data and files
+
+### Key Features
+
+- **Infrastructure as Code (IaC):** All Azure resources are defined and created using PowerShell scripts for consistency and repeatability.
+
+
+### How It Works
+
+1.  The `create-resources-storage.ps1` script provisions an Web App which uses Azure Blob Storage for storing files and Azure Cosmos DB to store the data about products
+2.  For the Azure Cosmos DB, I set the 'category' field as partition key in order to distribute the data on many phisycal partitions, a good solution for scalability and performance
