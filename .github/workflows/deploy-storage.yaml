@@ -1,0 +1,58 @@
+
+# the name displayed in Github for the workflow
+name: Build and deploy .NET web app (storage prep)
+
+# the trigger - tells to the workflow when to run
+on: 
+    push:
+        branches:
+            - main
+    
+    # allows to run the workflow manually
+    workflow_dispatch:
+
+
+# Env vars available to all jobs and steps in the workflow
+env:
+    AZURE_WEBAPP_NAME: 'webapp-rbr-storage-6591'
+    AZURE_WEBAPP_PACKAGE_PATH: './azure-storage/StorageApp'
+    DOTNET_VERSION: '9.0.x'
+
+# A workflow is made up of one or more workflows - they can run sequentially or in parallel
+jobs:
+    build-and-deploy:
+        runs-on: ubuntu-latest
+
+        steps:
+            # checkout the repo code so the workflow can access it
+            - name: 'Checkout GitHub Actions'
+              uses: actions/checkout@v3
+
+            # set the .net runtime 
+            - name: 'Set up .NET'
+              uses: actions/setup-dotnet@v3
+              with: 
+                dotnet-version: ${{ env.DOTNET_VERSION }}
+            
+            # Builds and publishes the .NET project in 'Release' mode.
+            # The output is placed in a directory named './publish'.
+            - name: 'Build and publish the project'
+              run: dotnet publish "${{ env.AZURE_WEBAPP_PACKAGE_PATH }}" --configuration Release --output ./publish
+            
+            # Log in to Azure using the secret stored in secrets and variables
+            - name: 'Login to Azure'
+              uses: azure/login@v1
+              with: 
+                creds: ${{ secrets.AZURE_CREDENTIALS_STORAGE }}
+
+            # Deploys the code to Azure
+            - name: 'Deploy to the Azure App Service (directly to prod for testing purpose)'
+              uses: azure/webapps-deploy@v2
+              with: 
+                app-name: ${{ env.AZURE_WEBAPP_NAME }}
+                package: './publish'
+
+            - name: 'Logs out from Azure'
+              run: az logout
+
+
