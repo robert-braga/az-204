@@ -39,3 +39,4 @@ secrets.json
 # Rider/ReSharper specific files
 .idea/
 *.sln.iml
+azure-storage/StorageApp/appsettings.Development.json
