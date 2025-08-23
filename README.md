@@ -62,3 +62,7 @@ This project demonstrates a setup for deploying a .NET Web App which uses Azure 
 
 1.  The `create-resources-storage.ps1` script provisions an Web App which uses Azure Blob Storage for storing files and Azure Cosmos DB to store the data about products
 2.  For the Azure Cosmos DB, I set the 'category' field as partition key in order to distribute the data on many phisycal partitions, a good solution for scalability and performance
+
+
+## 4. Telemetry project
+
